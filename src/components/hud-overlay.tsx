@@ -88,9 +88,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
       </div>
 
       {/* Glass panel */}
-      <div
-        className={`absolute z-[5] left-1/2 -translate-x-1/2 bottom-8 sm:bottom-12 md:bottom-16 pointer-events-none ${anim(4)}`}
-      >
+      <div className={`glass-panel-container ${anim(4)}`}>
         <div className="glass-panel pointer-events-auto">
           {/* Status */}
           <div className="flex items-center gap-2">

@@ -86,3 +86,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Build script now copies all pre-rendered files from `dist/client/` to `dist/` and removes temporary subdirectories
   - Ensures all static assets (favicon, manifest.json, robots.txt, images) are deployed correctly
   - Fixes missing files issue (16 files uploaded vs 34 required)
+- Glass panel overlapping system UI widgets on mobile devices (iOS home bar, Android navigation)
+  - Added `viewport-fit=cover` to viewport meta tag
+  - Added CSS `safe-area-inset` support with `@supports` query
+  - Created `.glass-panel-container` class with responsive safe-area-aware positioning
+  - Bottom padding now uses `max()` with `env(safe-area-inset-bottom)` fallback
+  - Glass panel maintains minimum 2rem/3rem/4rem spacing plus device-specific insets

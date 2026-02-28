@@ -32,11 +32,41 @@ body {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   touch-action: manipulation;
+  /* Safe area support for iOS notch/home bar */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 ::selection {
   background: var(--color-qq-pink);
   color: #fff;
+}
+
+/* ───────────────────────────────────────────
+   Safe area utilities (iOS notch/home bar)
+   ─────────────────────────────────────────── */
+
+@supports (padding: max(0px)) {
+  .safe-area-bottom {
+    padding-bottom: max(
+      2rem,
+      calc(2rem + env(safe-area-inset-bottom))
+    ) !important;
+  }
+
+  .safe-area-bottom-sm {
+    padding-bottom: max(
+      3rem,
+      calc(3rem + env(safe-area-inset-bottom))
+    ) !important;
+  }
+
+  .safe-area-bottom-md {
+    padding-bottom: max(
+      4rem,
+      calc(4rem + env(safe-area-inset-bottom))
+    ) !important;
+  }
 }
 
 /* ───────────────────────────────────────────
@@ -100,6 +130,46 @@ body {
 /* ───────────────────────────────────────────
    Glass panel (bottom bar container)
    ─────────────────────────────────────────── */
+
+.glass-panel-container {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2rem;
+  pointer-events: none;
+}
+
+/* Safe area support for mobile devices */
+@supports (padding: max(0px)) {
+  .glass-panel-container {
+    bottom: max(2rem, calc(2rem + env(safe-area-inset-bottom)));
+  }
+}
+
+@media (min-width: 640px) {
+  .glass-panel-container {
+    bottom: 3rem;
+  }
+
+  @supports (padding: max(0px)) {
+    .glass-panel-container {
+      bottom: max(3rem, calc(3rem + env(safe-area-inset-bottom)));
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .glass-panel-container {
+    bottom: 4rem;
+  }
+
+  @supports (padding: max(0px)) {
+    .glass-panel-container {
+      bottom: max(4rem, calc(4rem + env(safe-area-inset-bottom)));
+    }
+  }
+}
 
 .glass-panel {
   position: relative;

@@ -171,13 +171,6 @@ Three.js requires browser APIs (WebGL, DOM). The `<ClientOnly>` wrapper from `vi
 - Component hydrates only in browser
 - Lazy loading via React.lazy() reduces initial bundle size
 
-## Progressive Web App
-
-- **Manifest**: `manifest.json` with app name, icons, and theme
-- **Icons**: 192x192 and 512x512 PNG icons for install prompts
-- **Apple Touch Icon**: 180x180 icon for iOS home screen
-- **Theme Color**: `#282828` for browser UI theming
-
 All SEO assets are located in `public/` and automatically served by Vike during build.
 
 ## Browser Support
