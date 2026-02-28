@@ -17,10 +17,10 @@ function LoadingScreen() {
     <div className="absolute inset-0 z-10 flex items-center justify-center bg-qq-bg">
       <div className="loader">
         <div className="text-center">
-          <span className="text-[22px] sm:text-[26px] md:text-[28px] font-bold tracking-[2px] text-qq-text">
+          <span className="text-[28px] sm:text-[32px] md:text-[36px] font-bold tracking-[2px] text-qq-text">
             QQ
           </span>
-          <span className="block text-[8px] sm:text-[9px] md:text-[10px] font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/40 mt-1">
+          <span className="block text-[10px] sm:text-[11px] md:text-[12px] font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/80 mt-1">
             OMEGA LABS
           </span>
         </div>

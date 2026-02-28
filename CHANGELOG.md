@@ -55,9 +55,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Twitter Card metadata
   - Keywords, author, and locale meta tags
   - QQ logos (SVG and PNG variants) in `public/img/`
+- 404 error page with dual implementation strategy
+  - Static `public/404.html` for Cloudflare Pages fallback
+  - Pre-rendered Vike route at `/404` with React component (`pages/404/+Page.tsx`)
+  - Consistent design with main app (dark theme, QQ pink gradients, JetBrains Mono)
+  - Mobile-responsive layout with glassmorphism aesthetics
+  - Direct "Return to Home" CTA button
+- SPA routing configuration via `public/_redirects` for Cloudflare Pages
 
 ### Changed
 
+- Improved text readability across all UI elements
+  - Increased font sizes: "QQ" 28-36px (was 22-28px), "OMEGA LABS" 10-12px (was 8-10px)
+  - Increased text opacity: "OMEGA LABS" 80% (was 40%), status 70% (was 35%), hints 75% (was 35%), version 60% (was 25%)
+  - Enhanced glass panel contrast: background 85% opacity (was 55%), stronger border, increased blur 32px (was 28px)
+  - Increased glass panel padding for better text spacing
+  - Applied changes to LoadingScreen component for consistency
 - Enhanced SEO configuration in `+Head.tsx` with comprehensive meta tags
   - Added Twitter Card tags (`twitter:card`, `twitter:site`, `twitter:image`)
   - Extended Open Graph tags (image dimensions, locale, site name)

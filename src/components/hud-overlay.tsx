@@ -30,8 +30,7 @@ const SOCIAL_LINKS = [
 function SocialIcon({ d }: { d: string }) {
   return (
     <svg
-      width="15"
-      height="15"
+      className="w-[13px] h-[13px] sm:w-[14px] sm:h-[14px] md:w-[15px] md:h-[15px]"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden="true"
@@ -75,12 +74,12 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
         <div className="flex items-start justify-center mt-4 sm:mt-6 md:mt-8">
           <header className={`text-center ${anim(2)}`}>
             <div className="flex items-center justify-center">
-              <span className="text-[22px] sm:text-[26px] md:text-[28px] font-bold tracking-[2px] text-qq-text">
+              <span className="text-[28px] sm:text-[32px] md:text-[36px] font-bold tracking-[2px] text-qq-text">
                 QQ
               </span>
               <span className="blink-cursor" aria-hidden="true" />
             </div>
-            <span className="block text-[8px] sm:text-[9px] md:text-[10px] font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/40 mt-1">
+            <span className="block text-[10px] sm:text-[11px] md:text-[12px] font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/80 mt-1">
               OMEGA LABS
             </span>
           </header>
@@ -93,7 +92,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
           {/* Status */}
           <div className="flex items-center gap-2">
             <span className="status-dot" aria-hidden="true" />
-            <span className="text-[8px] sm:text-[9px] tracking-[2px] text-qq-text/35 uppercase">
+            <span className="text-[9px] sm:text-[10px] tracking-[1.5px] text-qq-text/70 uppercase">
               sys.online
             </span>
           </div>
@@ -124,9 +123,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
           {/* Interaction hint */}
           <div className="flex items-center gap-1.5 hint-text">
             <svg
-              className="orbit-icon"
-              width="11"
-              height="11"
+              className="orbit-icon w-[10px] h-[10px] sm:w-[11px] sm:h-[11px]"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -136,7 +133,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
               <circle cx="12" cy="12" r="3" />
               <ellipse cx="12" cy="12" rx="10" ry="4" />
             </svg>
-            <span className="text-[8px] sm:text-[9px] text-qq-text/35 tracking-[1px] whitespace-nowrap">
+            <span className="text-[9px] sm:text-[10px] text-qq-text/75 tracking-[0.5px] whitespace-nowrap">
               <span className="hidden sm:inline">drag to rotate</span>
               <span className="inline sm:hidden">tap &amp; drag</span>
             </span>
@@ -145,7 +142,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
           {/* Version (tablet+) */}
           <GlassDivider className="hidden sm:block" />
           <span
-            className="hidden sm:block text-[8px] tracking-[2px] text-qq-text/25 whitespace-nowrap"
+            className="hidden sm:block text-[10px] tracking-[2px] text-qq-text/60 whitespace-nowrap"
             aria-hidden="true"
           >
             v0.1.0
