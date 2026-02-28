@@ -8,6 +8,7 @@ import type { Config } from 'vike/types'
 export default {
   extends: [vikeReact],
   prerender: true,
-  title: 'QQ Omega Labs',
+  title: 'QQ Omega Labs - AI-Powered Crypto Scoring Platform',
+  description: 'QQ Omega combines AI-powered agents to score and rank cryptocurrency projects across fundamentals, tokenomics, on-chain metrics, technicals, and macro trends.',
   lang: 'en',
 } satisfies Config

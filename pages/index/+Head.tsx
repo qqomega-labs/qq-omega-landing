@@ -1,14 +1,60 @@
 /**
  * @dev HTML head metadata for homepage.
- * Includes SEO tags, Open Graph, and theme color.
+ * Includes comprehensive SEO tags, Open Graph, Twitter Card, and PWA manifest.
  */
 export default function Head() {
   return (
     <>
-      <meta name="description" content="QQ Omega Labs - AI-powered crypto asset scoring" />
-      <meta property="og:title" content="QQ Omega Labs" />
-      <meta property="og:description" content="AI-powered crypto asset scoring" />
-      <meta name="theme-color" content="#FD015A" />
+      {/* SEO Meta Tags */}
+      <meta
+        name="keywords"
+        content="QQ Omega, crypto scoring, AI agents, cryptocurrency analysis, quantitative analysis, qualitative analysis, crypto trading, blockchain analytics, DeFi, tokenomics, on-chain analysis, crypto fundamentals"
+      />
+      <meta
+        name="description"
+        content="QQ Omega combines AI-powered agents to score and rank cryptocurrency projects across fundamentals, tokenomics, on-chain metrics, technicals, and macro trends. Get clear, actionable scores for smarter crypto investments."
+      />
+      <meta name="author" content="QQ Omega Labs" />
+
+      {/* Twitter Card Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@qqomega" />
+      <meta name="twitter:creator" content="@qqomega" />
+      <meta name="twitter:title" content="QQ Omega Labs - AI-Powered Crypto Scoring Platform" />
+      <meta
+        name="twitter:description"
+        content="Combining quantitative and qualitative data to evaluate every aspect of crypto assets with specialized AI agents."
+      />
+      <meta name="twitter:image" content="https://qqomega.xyz/img/qq-og-image.png" />
+
+      {/* Open Graph Tags */}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="QQ Omega Labs - AI-Powered Crypto Scoring Platform" />
+      <meta
+        property="og:description"
+        content="QQ Omega combines AI-powered agents to score and rank cryptocurrency projects. Get clear, actionable scores for smarter crypto investments."
+      />
+      <meta property="og:url" content="https://qqomega.xyz" />
+      <meta property="og:image" content="https://qqomega.xyz/img/qq-og-image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="QQ Omega Labs" />
+      <meta property="og:site_name" content="QQ Omega Labs" />
+      <meta property="og:locale" content="en_US" />
+      <meta property="og:locale:alternate" content="zh_CN" />
+
+      {/* Favicon and Icons */}
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+      {/* PWA Manifest */}
+      <link rel="manifest" href="/manifest.json" />
+
+      {/* Theme and Mobile */}
+      <meta name="theme-color" content="#282828" />
+      <meta name="apple-mobile-web-app-title" content="QQ Omega" />
     </>
   )
 }

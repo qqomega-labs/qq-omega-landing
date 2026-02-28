@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qqomega.xyz/sitemap.xml
+
+# Disallow build artifacts and development files
+Disallow: /dist/
+Disallow: /node_modules/

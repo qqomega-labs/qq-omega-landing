@@ -35,7 +35,15 @@ qq-omega-website/
 │   └── styles/
 │       └── app.css           # Global styles, custom utilities, animations
 ├── public/
-│   └── _headers              # Security and caching headers (Netlify/Cloudflare)
+│   ├── _headers              # Security and caching headers (Netlify/Cloudflare)
+│   ├── favicon.*             # Favicon (ICO, SVG, PNG sizes)
+│   ├── apple-*.png           # Apple touch icons
+│   ├── web-app-manifest-*.png # PWA icons
+│   ├── manifest.json         # PWA manifest
+│   ├── robots.txt            # Search engine directives
+│   └── img/
+│       ├── qq-og-image.png   # Open Graph share image (1200x630)
+│       └── QQ*.{svg,png}     # Logo variants
 ├── dist/                     # Build output (static files)
 ├── package.json
 ├── tsconfig.json
@@ -163,12 +171,14 @@ Three.js requires browser APIs (WebGL, DOM). The `<ClientOnly>` wrapper from `vi
 - Component hydrates only in browser
 - Lazy loading via React.lazy() reduces initial bundle size
 
-### Mobile Optimization
+## Progressive Web App
 
-- **Adaptive Camera**: Wider FOV and increased Z distance on narrow screens to prevent coin clipping
-- **Reduced DPR**: Caps `devicePixelRatio` at 1.5 on mobile (vs 2.0 on desktop) to save GPU
-- **Lower Geometry**: 32 segments on mobile vs 64 on desktop
-- **Touch-Friendly**: `touch-action: manipulation` prevents double-tap zoom, 44px minimum touch targets
+- **Manifest**: `manifest.json` with app name, icons, and theme
+- **Icons**: 192x192 and 512x512 PNG icons for install prompts
+- **Apple Touch Icon**: 180x180 icon for iOS home screen
+- **Theme Color**: `#282828` for browser UI theming
+
+All SEO assets are located in `public/` and automatically served by Vike during build.
 
 ## Browser Support
 

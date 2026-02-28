@@ -46,9 +46,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SEO metadata with Open Graph tags in `+Head.tsx`
 - TypeScript strict mode with comprehensive type definitions
 - Visibility API integration (pauses animation when tab inactive)
+- Comprehensive SEO infrastructure
+  - Favicon set (ICO, SVG, 16x16, 32x32)
+  - Apple touch icons (180x180)
+  - PWA manifest with 192x192 and 512x512 icons
+  - robots.txt with sitemap reference
+  - Open Graph image (`qq-og-image.png` 1200x630)
+  - Twitter Card metadata
+  - Keywords, author, and locale meta tags
+  - QQ logos (SVG and PNG variants) in `public/img/`
 
 ### Changed
 
+- Enhanced SEO configuration in `+Head.tsx` with comprehensive meta tags
+  - Added Twitter Card tags (`twitter:card`, `twitter:site`, `twitter:image`)
+  - Extended Open Graph tags (image dimensions, locale, site name)
+  - Added keywords meta tag with crypto-focused terms
+  - Expanded description meta tag for better search results
+  - Linked favicon set (SVG, ICO, PNG 16x16, PNG 32x32)
+  - Linked Apple touch icon (180x180)
+  - Linked PWA manifest
+- Updated `+config.ts` with full site title and description
 - Separated `CoinViewer` from HUD overlay into dedicated components
   - `coin-viewer.tsx` now handles only 3D canvas and drag interaction
   - New `hud-overlay.tsx` for header, corner brackets, and glass panel
@@ -64,3 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Memory leak: procedural canvas elements tracked and released (`width=0, height=0`) on dispose
 - Animation loop continues running when browser tab is hidden (now pauses via Visibility API)
 - `animClass` helper recreated on every render (wrapped with `useCallback`)
+- Cloudflare Pages deployment returning 404: modified build script to flatten `dist/client/` structure to `dist/` root
+  - Build script now copies all pre-rendered files from `dist/client/` to `dist/` and removes temporary subdirectories
+  - Ensures all static assets (favicon, manifest.json, robots.txt, images) are deployed correctly
+  - Fixes missing files issue (16 files uploaded vs 34 required)
