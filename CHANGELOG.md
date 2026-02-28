@@ -55,13 +55,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Twitter Card metadata
   - Keywords, author, and locale meta tags
   - QQ logos (SVG and PNG variants) in `public/img/`
-- 404 error page with dual implementation strategy
-  - Static `public/404.html` for Cloudflare Pages fallback
-  - Pre-rendered Vike route at `/404` with React component (`pages/404/+Page.tsx`)
+- 404 error page using Vike `_error` convention
+  - Pre-rendered error page at `pages/_error/+Page.tsx`
+  - Generates `dist/404.html` with Vike SSG
   - Consistent design with main app (dark theme, QQ pink gradients, JetBrains Mono)
   - Mobile-responsive layout with glassmorphism aesthetics
   - Direct "Return to Home" CTA button
-- SPA routing configuration via `public/_redirects` for Cloudflare Pages
+- Cloudflare Pages routing configuration via `public/_redirects`
+  - Root `/` serves `index.html` (status 200)
+  - All other routes serve `404.html` (status 404)
 
 ### Changed
 

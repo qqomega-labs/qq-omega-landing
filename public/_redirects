@@ -1,3 +1,4 @@
-# Cloudflare Pages SPA routing configuration
-# Serves index.html for all routes to enable client-side routing
-/* /index.html 200
+# Cloudflare Pages routing configuration
+# Serve homepage for root, 404 for everything else
+/ /index.html 200
+/* /404.html 404
