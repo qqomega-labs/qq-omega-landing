@@ -181,4 +181,14 @@ All SEO assets are located in `public/` and automatically served by Vike during 
 
 ## License
 
-Private repository for QQ Omega Labs.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+**Note:** While the code is open source under MIT, the QQ Omega brand, logo, and visual assets remain the exclusive property of QQ Omega Labs. See the LICENSE file for full details on trademark and asset restrictions.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Trademark
+
+"QQ Omega Labs", "QQ Omega", and the QQ logo are trademarks of QQ Omega Labs. Use of these trademarks requires explicit permission.

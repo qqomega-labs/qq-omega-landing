@@ -1,8 +1,17 @@
 {
   "name": "qq-omega-landing",
-  "private": true,
   "version": "0.1.0",
+  "license": "MIT",
   "type": "module",
+  "author": "QQ Omega Labs",
+  "homepage": "https://qqomega.xyz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qqomega-labs/qq-omega-landing"
+  },
+  "bugs": {
+    "url": "https://github.com/qqomega-labs/qq-omega-landing/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp -r dist/client/. dist/ && rm -rf dist/client dist/server",
