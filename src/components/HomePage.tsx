@@ -1,12 +1,10 @@
 /**
- * @dev Homepage with 3D coin viewer and HUD-style overlay.
- * Orchestrates loading state and staggered entry animations.
+ * @dev Homepage React island.
+ * Orchestrates loading state and 3D coin viewer with HUD overlay.
  */
-import { lazy, Suspense, useState, useEffect, useCallback } from "react";
-import { ClientOnly } from "vike-react/ClientOnly";
-
-const CoinViewer = lazy(() => import("../../src/components/coin-viewer"));
-const HudOverlay = lazy(() => import("../../src/components/hud-overlay"));
+import { useState, useEffect, useCallback } from 'react'
+import CoinViewer from './coin-viewer'
+import HudOverlay from './hud-overlay'
 
 /**
  * @dev Loading screen displayed during scene initialization.
@@ -29,22 +27,22 @@ function LoadingScreen() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default function Page() {
-  const [ready, setReady] = useState(false);
-  const [mounted, setMounted] = useState(false);
+export default function HomePage() {
+  const [ready, setReady] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
-  const handleReady = useCallback(() => setReady(true), []);
+  const handleReady = useCallback(() => setReady(true), [])
 
   // Trigger staggered entry animations after scene is ready
   useEffect(() => {
     if (ready) {
-      const timer = setTimeout(() => setMounted(true), 100);
-      return () => clearTimeout(timer);
+      const timer = setTimeout(() => setMounted(true), 100)
+      return () => clearTimeout(timer)
     }
-  }, [ready]);
+  }, [ready])
 
   return (
     <div className="bg-radial-deep w-full h-dvh relative overflow-hidden">
@@ -52,16 +50,12 @@ export default function Page() {
       <div className="bg-filigree absolute inset-0 pointer-events-none z-[1]" />
       <div className="bg-vignette absolute inset-0 pointer-events-none z-[2]" />
 
-      {/* Client-only 3D viewer + HUD */}
-      <ClientOnly fallback={<LoadingScreen />}>
-        <Suspense fallback={<LoadingScreen />}>
-          <CoinViewer onReady={handleReady} />
-          <HudOverlay mounted={mounted} />
-        </Suspense>
-      </ClientOnly>
+      {/* 3D viewer + HUD */}
+      <CoinViewer onReady={handleReady} />
+      <HudOverlay mounted={mounted} />
 
       {/* Loading overlay - hides when scene is ready */}
       {!ready && <LoadingScreen />}
     </div>
-  );
+  )
 }
