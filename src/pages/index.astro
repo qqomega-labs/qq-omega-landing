@@ -1,0 +1,12 @@
+---
+/**
+ * @dev Homepage with 3D coin viewer and HUD-style overlay.
+ * Uses Astro islands architecture: static HTML + React islands for interactivity.
+ */
+import Layout from '../layouts/Layout.astro'
+import HomePage from '../components/HomePage.tsx'
+---
+
+<Layout title="QQ Omega Labs - AI-Powered Crypto Scoring Platform">
+  <HomePage client:only="react" />
+</Layout>

@@ -5,7 +5,80 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unrealeased] - 2026-02-28 (QQAlpha)
+## [Unreleased] - 2026-03-09 (Astro Migration)
+
+### Added
+
+- **Astro v5.18** as static site generator (replacing Vike)
+  - Astro islands architecture for optimal performance
+  - File-based routing with `src/pages/` directory
+  - Static HTML generation with selective React hydration
+- **Prettier** code formatting with Astro plugin
+  - Configuration file `.prettierrc.json`
+  - Ignore file `.prettierignore`
+  - Format script `pnpm run format`
+- New `src/layouts/Layout.astro` base layout with SEO metadata
+- New `src/pages/404.astro` error page (Astro format)
+- New `src/components/HomePage.tsx` React island orchestrating 3D viewer and HUD
+- Test page `src/pages/test.astro` for debugging React integration
+- MIT License file with brand asset restrictions
+- `TRADEMARK.md` documenting QQ Omega brand usage policy
+- TypeScript import type support for better bundling
+
+### Changed
+
+- **Migration from Vike to Astro**
+  - Changed from Vike SSG to Astro static site generation
+  - Restructured project: `pages/` → `src/pages/` with `.astro` files
+  - Changed routing from Vike convention (`+Page.tsx`, `+Head.tsx`) to Astro file-based routing
+  - React components now hydrate as Astro islands with `client:only="react"`
+- **Removed lazy loading** from `HomePage` component
+  - Removed `React.lazy()` and `Suspense` wrapper
+  - Direct imports of `CoinViewer` and `HudOverlay` for better reliability with Astro islands
+- **Performance optimization**
+  - Bundle size reduced: ~194 KB total (Three.js: 124 KB, React: 58 KB, App: 12 KB)
+  - Faster initial page load with static HTML + selective hydration
+  - Server-side rendered loader screen for instant visual feedback
+- Updated `package.json` scripts
+  - `dev`: `astro dev` (was `vite`)
+  - `build`: `astro check && astro build` (was `vite build`)
+  - `preview`: `astro preview` (was `vite preview`)
+- Updated `README.md` with Astro-specific documentation
+  - New architecture section explaining Astro islands
+  - Updated performance metrics and bundle sizes
+  - Changed package manager examples from Bun to pnpm
+- Updated `tsconfig.json` to extend Astro strict config
+- Changed SEO metadata location from `pages/index/+Head.tsx` to `src/layouts/Layout.astro`
+
+### Removed
+
+- **Vike framework** and all related dependencies
+  - Removed `vike` package
+  - Removed `vike-react` package
+  - Removed `vike-react/ClientOnly` wrapper
+- Removed Vike-specific files and directories
+  - Removed `pages/+Layout.tsx`
+  - Removed `pages/index/+Page.tsx`
+  - Removed `pages/index/+Head.tsx`
+  - Removed `pages/_error/` directory
+  - Removed entire `pages/` directory structure
+- Removed `vite.config.ts` (Astro uses its own config)
+- Removed `@astrojs/tailwind` integration (using `@tailwindcss/vite` directly)
+
+### Fixed
+
+- **TypeScript import error** for `ICoinScene` interface
+  - Changed from value import to type import: `import type { ICoinScene }`
+  - Resolves "Importing binding name 'ICoinScene' is not found" error during hydration
+  - Fixes black screen issue where React components failed to hydrate
+- Improved Tailwind CSS v4 integration with Astro
+  - Configured `@tailwindcss/vite` plugin in `astro.config.mjs`
+  - Ensures custom CSS classes and animations compile correctly
+- Loader animation now displays correctly on initial page load
+  - Server-side rendering ensures loader is visible immediately
+  - Fixed hydration timing to prevent blank screen during Three.js initialization
+
+## [0.1.0] - 2026-02-28 (QQAlpha)
 
 ### Added
 
