@@ -13,7 +13,7 @@ import HudOverlay from './hud-overlay'
 function LoadingScreen() {
   return (
     <div className="absolute inset-0 z-10 flex items-center justify-center bg-qq-bg">
-      <div className="loader">
+      <div className="flex flex-col items-center gap-4">
         <div className="text-center">
           <span className="text-[28px] sm:text-[32px] md:text-[36px] font-bold tracking-[2px] text-qq-text">
             QQ
@@ -22,8 +22,8 @@ function LoadingScreen() {
             OMEGA LABS
           </span>
         </div>
-        <div className="loader-bar">
-          <div className="loader-bar-fill" />
+        <div className="w-[100px] md:w-[120px] h-[2px] bg-qq-pink/6 rounded-[1px] overflow-hidden">
+          <div className="w-2/5 h-full bg-qq-pink rounded-[1px] [animation:loader-slide_3s_ease-in-out_infinite]" />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "@fontsource-variable/jetbrains-mono";
+@import 'tailwindcss';
+@import '@fontsource-variable/jetbrains-mono';
 
 @theme {
   --color-qq-pink: #fd015a;
@@ -7,104 +7,57 @@
   --color-qq-bg: #040108;
   --color-qq-surface: #0a0312;
   --color-qq-text: #f0e8f0;
-  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
 }
 
-/* Reset */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Reset — wrapped in @layer base so Tailwind utilities can override */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  height: 100dvh;
-  overflow: hidden;
-  background: var(--color-qq-bg);
-  color: var(--color-qq-text);
-  font-family: var(--font-mono);
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  touch-action: manipulation;
-}
-
-::selection {
-  background: var(--color-qq-pink);
-  color: #fff;
-}
-
-/* ───────────────────────────────────────────
-   Safe area utilities (iOS notch/home bar)
-   ─────────────────────────────────────────── */
-
-@supports (padding: max(0px)) {
-  .safe-area-bottom {
-    padding-bottom: max(
-      2rem,
-      calc(2rem + env(safe-area-inset-bottom))
-    ) !important;
+@layer base {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--color-qq-bg);
+    color: var(--color-qq-text);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
   }
 
-  .safe-area-bottom-sm {
-    padding-bottom: max(
-      3rem,
-      calc(3rem + env(safe-area-inset-bottom))
-    ) !important;
-  }
-
-  .safe-area-bottom-md {
-    padding-bottom: max(
-      4rem,
-      calc(4rem + env(safe-area-inset-bottom))
-    ) !important;
+  ::selection {
+    background: var(--color-qq-pink);
+    color: #fff;
   }
 }
 
 /* ───────────────────────────────────────────
    Background utilities
+   Complex multi-layer gradients/patterns 
+   (not expressible as single Tailwind values)
    ─────────────────────────────────────────── */
 
 .bg-radial-deep {
   background:
-    radial-gradient(
-      ellipse at 50% 45%,
-      rgba(253, 1, 90, 0.14) 0%,
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at 20% 80%,
-      rgba(253, 1, 90, 0.06) 0%,
-      transparent 38%
-    ),
-    radial-gradient(
-      ellipse at 80% 20%,
-      rgba(120, 0, 60, 0.07) 0%,
-      transparent 32%
-    ),
+    radial-gradient(ellipse at 50% 45%, rgba(253, 1, 90, 0.14) 0%, transparent 42%),
+    radial-gradient(ellipse at 20% 80%, rgba(253, 1, 90, 0.06) 0%, transparent 38%),
+    radial-gradient(ellipse at 80% 20%, rgba(120, 0, 60, 0.07) 0%, transparent 32%),
     radial-gradient(ellipse at 40% 30%, #120610 0%, #060110 42%, #000 100%);
 }
 
-/* Primary grid */
-.bg-grid-pink {
-  background-image:
-    linear-gradient(rgba(253, 1, 90, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(253, 1, 90, 0.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-@media (min-width: 768px) {
-  .bg-grid-pink {
-    background-size: 80px 80px;
-  }
-}
-
-/* Honeycomb hexagonal pattern */
+/* Honeycomb hexagonal pattern SVG data URI + responsive size */
 .bg-filigree {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%23fd015a' stroke-width='0.4' opacity='0.06'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%23fd015a' stroke-width='0.25' opacity='0.03'/%3E%3C/svg%3E");
   background-size: 64px 114px;
@@ -117,15 +70,13 @@ body {
 }
 
 .bg-vignette {
-  background: radial-gradient(
-    ellipse at center,
-    transparent 35%,
-    rgba(0, 0, 0, 0.65) 100%
-  );
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.65) 100%);
 }
 
 /* ───────────────────────────────────────────
-   Glass panel (bottom bar container)
+   Glass panel container
+   Needs env(safe-area-inset-bottom) 
+   (not expressible in Tailwind)
    ─────────────────────────────────────────── */
 
 .glass-panel-container {
@@ -140,7 +91,6 @@ body {
   align-items: center;
 }
 
-/* Safe area support for mobile devices */
 @supports (padding: max(0px)) {
   .glass-panel-container {
     bottom: max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom) + 0.5rem));
@@ -171,6 +121,11 @@ body {
   }
 }
 
+/* ───────────────────────────────────────────
+   Glass panel
+   Needs ::after pseudo-element for sweep animation
+   ─────────────────────────────────────────── */
+
 .glass-panel {
   position: relative;
   overflow: visible;
@@ -192,9 +147,25 @@ body {
     inset 0 -1px 0 rgba(253, 1, 90, 0.08);
 }
 
+@media (min-width: 640px) {
+  .glass-panel {
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .glass-panel {
+    gap: 14px;
+    padding: 12px 22px;
+    border-radius: 16px;
+  }
+}
+
 /* Sweeping light glow beneath the glass panel */
 .glass-panel::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 100%;
   left: 0;
@@ -212,18 +183,6 @@ body {
   opacity: 0.6;
 }
 
-@keyframes panel-light-sweep {
-  0% {
-    transform: translateX(-30%);
-  }
-  50% {
-    transform: translateX(30%);
-  }
-  100% {
-    transform: translateX(-30%);
-  }
-}
-
 @media (min-width: 768px) {
   .glass-panel::after {
     height: 24px;
@@ -237,32 +196,21 @@ body {
   }
 }
 
-@media (min-width: 640px) {
-  .glass-panel {
-    gap: 10px;
-    padding: 10px 16px;
-    border-radius: 14px;
+@keyframes panel-light-sweep {
+  0% {
+    transform: translateX(-30%);
   }
-}
-
-@media (min-width: 768px) {
-  .glass-panel {
-    gap: 14px;
-    padding: 12px 22px;
-    border-radius: 16px;
+  50% {
+    transform: translateX(30%);
   }
-}
-
-/* Vertical divider inside glass panel */
-.glass-divider {
-  width: 1px;
-  height: 16px;
-  background: rgba(253, 1, 90, 0.1);
-  flex-shrink: 0;
+  100% {
+    transform: translateX(-30%);
+  }
 }
 
 /* ───────────────────────────────────────────
    Staggered fade-in animation
+   Class names are dynamically composed (delay-${n}) must stay in CSS
    ─────────────────────────────────────────── */
 
 @keyframes fade-in {
@@ -298,7 +246,8 @@ body {
 }
 
 /* ───────────────────────────────────────────
-   Corner bracket markers (HUD aesthetic)
+   Corner bracket markers
+   Needs ::before and ::after pseudo-elements
    ─────────────────────────────────────────── */
 
 .corner-bracket {
@@ -317,29 +266,24 @@ body {
 
 .corner-bracket::before,
 .corner-bracket::after {
-  content: "";
+  content: '';
   position: absolute;
   background: rgba(253, 1, 90, 0.12);
 }
 
-/* Horizontal stroke */
 .corner-bracket::before {
   width: 100%;
   height: 1px;
 }
-
-/* Vertical stroke */
 .corner-bracket::after {
   width: 1px;
   height: 100%;
 }
 
-/* Top-left */
 .corner-tl {
   top: 12px;
   left: 12px;
 }
-
 .corner-tl::before {
   top: 0;
   left: 0;
@@ -349,12 +293,10 @@ body {
   left: 0;
 }
 
-/* Top-right */
 .corner-tr {
   top: 12px;
   right: 12px;
 }
-
 .corner-tr::before {
   top: 0;
   right: 0;
@@ -364,12 +306,10 @@ body {
   right: 0;
 }
 
-/* Bottom-left */
 .corner-bl {
   bottom: 12px;
   left: 12px;
 }
-
 .corner-bl::before {
   bottom: 0;
   left: 0;
@@ -379,12 +319,10 @@ body {
   left: 0;
 }
 
-/* Bottom-right */
 .corner-br {
   bottom: 12px;
   right: 12px;
 }
-
 .corner-br::before {
   bottom: 0;
   right: 0;
@@ -414,7 +352,8 @@ body {
 }
 
 /* ───────────────────────────────────────────
-   Blinking cursor
+   Keyframes
+   Referenced via Tailwind [animation:...] arbitrary values in JSX
    ─────────────────────────────────────────── */
 
 @keyframes blink-cursor {
@@ -426,20 +365,6 @@ body {
     opacity: 0;
   }
 }
-
-.blink-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background: var(--color-qq-pink);
-  margin-left: 4px;
-  vertical-align: middle;
-  animation: blink-cursor 1s step-end infinite;
-}
-
-/* ───────────────────────────────────────────
-   Status dot pulse
-   ─────────────────────────────────────────── */
 
 @keyframes status-pulse {
   0%,
@@ -453,75 +378,17 @@ body {
   }
 }
 
-.status-dot {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--color-qq-pink);
-  animation: status-pulse 2s ease-in-out infinite;
-}
-
-/* ───────────────────────────────────────────
-   Social links (inside glass panel)
-   ─────────────────────────────────────────── */
-
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgba(253, 1, 90, 0.08);
-  border: 1px solid rgba(253, 1, 90, 0.15);
-  color: rgba(240, 232, 240, 0.6);
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease,
-    background 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-@media (min-width: 640px) {
-  .social-link {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(0, 220, 120, 0.5);
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 4px rgba(0, 220, 120, 0);
   }
 }
-
-@media (min-width: 768px) {
-  .social-link {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-  }
-}
-
-@media (hover: hover) {
-  .social-link:hover {
-    background: rgba(253, 1, 90, 0.2);
-    border-color: rgba(253, 1, 90, 0.4);
-    color: var(--color-qq-text);
-    transform: scale(1.1);
-    box-shadow: 0 0 12px rgba(253, 1, 90, 0.2);
-  }
-}
-
-.social-link:active {
-  transform: scale(0.95);
-}
-
-.social-link:focus-visible {
-  outline: 2px solid var(--color-qq-pink);
-  outline-offset: 2px;
-}
-
-/* ───────────────────────────────────────────
-   Orbit icon animation (interaction hint)
-   ─────────────────────────────────────────── */
 
 @keyframes orbit-spin {
   from {
@@ -532,12 +399,6 @@ body {
   }
 }
 
-.orbit-icon {
-  display: inline-block;
-  animation: orbit-spin 6s linear infinite;
-}
-
-/* Subtle pulse on the hint text */
 @keyframes hint-pulse {
   0%,
   100% {
@@ -546,87 +407,6 @@ body {
   50% {
     opacity: 0.45;
   }
-}
-
-.hint-text {
-  animation: hint-pulse 3s ease-in-out infinite;
-}
-
-/* ───────────────────────────────────────────
-   Loader
-   ─────────────────────────────────────────── */
-
-.loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.loader-content {
-  text-align: center;
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-.loader-text {
-  display: block;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: rgba(240, 232, 240, 0.6);
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-  opacity: 1 !important;
-}
-
-.loader-subtitle {
-  display: block;
-  font-size: 8px;
-  font-weight: 300;
-  letter-spacing: 4px;
-  color: var(--color-qq-pink);
-  margin-top: 8px;
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-@media (min-width: 640px) {
-  .loader-subtitle {
-    font-size: 9px;
-    letter-spacing: 5px;
-  }
-}
-
-@media (min-width: 768px) {
-  .loader-text {
-    font-size: 20px;
-  }
-}
-
-.loader-bar {
-  width: 100px;
-  height: 2px;
-  background: rgba(253, 1, 90, 0.06);
-  border-radius: 1px;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .loader-bar {
-    width: 120px;
-  }
-}
-
-.loader-bar-fill {
-  width: 40%;
-  height: 100%;
-  background: var(--color-qq-pink);
-  border-radius: 1px;
-  animation: loader-slide 3s ease-in-out infinite;
 }
 
 @keyframes loader-slide {
@@ -641,16 +421,3 @@ body {
   }
 }
 
-@keyframes loading-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.3;
-  }
-}
-
-.animate-loading-pulse {
-  animation: loading-pulse 1.5s ease-in-out infinite;
-}

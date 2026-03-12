@@ -1,11 +1,25 @@
 /**
- * @dev HUD-style overlay with header, corner brackets, and glass info panel.
+ * @dev HUD-style overlay with header, corner brackets, glass info panel, and hero CTA.
  * Pure presentational component, animation driven by `mounted` prop.
  */
 
 // PRIVATE - Data
 
 const CORNERS = ['tl', 'tr', 'bl', 'br'] as const
+
+/**
+ * @dev Extensible buy action registry. Add Base, ETH, or other chains here.
+ */
+const BUY_ACTIONS = [
+  {
+    id: 'buy-qq-solana',
+    label: 'Buy $QQ on Solana',
+    href: 'https://jup.ag/tokens/76vURLKDqAMhiX2wvoedoWRNvwqSjsZ7EtrJKJiKArDN',
+    statusLabel: 'Launchpad Live',
+    trackingEvent: 'buy_qq_solana_click',
+    dataCta: 'buy-qq-solana',
+  },
+] as const
 
 const SOCIAL_LINKS = [
   {
@@ -25,7 +39,59 @@ const SOCIAL_LINKS = [
   },
 ] as const
 
+// PRIVATE - Analytics
+
+/**
+ * @dev Fires analytics event to gtag/plausible if either is loaded on the page.
+ * No-op when neither is present.
+ */
+function trackClick(event: string) {
+  if (typeof window === 'undefined') return
+  if ('gtag' in window) (window as any).gtag('event', event)
+  if ('plausible' in window) (window as any).plausible(event)
+}
+
 // PRIVATE - Subcomponents
+
+function LiveBadge({ label }: { label: string }) {
+  return (
+    <div
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[rgba(0,220,120,0.06)] border border-[rgba(0,220,120,0.2)] text-[8px] sm:text-[9px] tracking-[1.5px] uppercase text-[rgba(0,220,120,0.7)]"
+      data-status="launchpad-live"
+    >
+      {/* live-dot: Tailwind can't express this box-shadow pulse keyframe */}
+      <span
+        className="inline-block w-[5px] h-[5px] rounded-full bg-[#00dc78] shrink-0 [animation:live-pulse_2.4s_ease-in-out_infinite]"
+        aria-hidden="true"
+      />
+      <span>{label}</span>
+    </div>
+  )
+}
+
+function SolanaIcon() {
+  return (
+    <svg
+      className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px]"
+      viewBox="0 0 397.7 311.7"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7z"
+        fill="currentColor"
+      />
+      <path
+        d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z"
+        fill="currentColor"
+      />
+      <path
+        d="M333.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
 
 function SocialIcon({ d }: { d: string }) {
   return (
@@ -38,10 +104,6 @@ function SocialIcon({ d }: { d: string }) {
       <path d={d} />
     </svg>
   )
-}
-
-function GlassDivider({ className = '' }: { className?: string }) {
-  return <span className={`glass-divider ${className}`} aria-hidden="true" />
 }
 
 // PUBLIC
@@ -70,7 +132,11 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
               <span className="text-[28px] sm:text-[32px] md:text-[36px] font-bold tracking-[2px] text-qq-text">
                 QQ
               </span>
-              <span className="blink-cursor" aria-hidden="true" />
+              {/* blink-cursor: step-end timing + 1em height tied to parent font-size — CSS only */}
+              <span
+                className="inline-block w-[2px] h-[1em] bg-qq-pink ml-1 align-middle [animation:blink-cursor_1s_step-end_infinite]"
+                aria-hidden="true"
+              />
             </div>
             <span className="block text-[10px] sm:text-[11px] md:text-[12px] font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/80 mt-1">
               OMEGA LABS
@@ -79,18 +145,51 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
         </div>
       </div>
 
+      {/* Hero CTA - primary conversion action */}
+      <div
+        className={`absolute inset-x-0 z-[5] bottom-[6rem] sm:bottom-[8rem] md:bottom-[9.5rem] flex justify-center items-center px-4 pointer-events-none ${anim(3)}`}
+      >
+        {BUY_ACTIONS.map(action => (
+          <div key={action.id} className="flex flex-col items-center gap-2.5 pointer-events-auto">
+            <LiveBadge label={action.statusLabel} />
+            <a
+              href={action.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-center gap-3 min-h-[48px] sm:min-h-[52px] md:min-h-[56px] py-3.5 sm:py-4 md:py-[18px] px-6 sm:px-8 md:px-10 rounded-xl sm:rounded-[14px] md:rounded-2xl font-mono text-[12px] sm:text-[13px] md:text-[14px] font-semibold tracking-[0.3px] text-qq-text no-underline whitespace-nowrap backdrop-blur-2xl bg-[rgba(10,3,18,0.75)] border border-qq-pink/35 shadow-[0_0_24px_rgba(253,1,90,0.1),0_2px_16px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.04)] transition-all duration-200 [@media(hover:hover)]:hover:bg-[rgba(253,1,90,0.12)] [@media(hover:hover)]:hover:border-qq-pink/50 [@media(hover:hover)]:hover:text-white [@media(hover:hover)]:hover:shadow-[0_0_36px_rgba(253,1,90,0.18),0_4px_20px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.06)] [@media(hover:hover)]:hover:-translate-y-px active:scale-[0.97] active:translate-y-0 focus-visible:outline-2 focus-visible:outline-qq-pink focus-visible:outline-offset-2"
+              data-cta={action.dataCta}
+              aria-label={action.label}
+              onClick={() => trackClick(action.trackingEvent)}
+            >
+              <SolanaIcon />
+              <span>{action.label}</span>
+              <span
+                className="inline-block transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-0.5 text-qq-pink/60"
+                aria-hidden="true"
+              >
+                &rarr;
+              </span>
+            </a>
+          </div>
+        ))}
+      </div>
+
       {/* Glass panel */}
       <div className={`glass-panel-container ${anim(4)}`}>
         <div className="glass-panel pointer-events-auto">
           {/* Status */}
           <div className="flex items-center gap-2">
-            <span className="status-dot" aria-hidden="true" />
+            {/* status-dot: box-shadow pulse keyframe — CSS only */}
+            <span
+              className="inline-block w-[5px] h-[5px] rounded-full bg-qq-pink [animation:status-pulse_2s_ease-in-out_infinite]"
+              aria-hidden="true"
+            />
             <span className="text-[9px] sm:text-[10px] tracking-[1.5px] text-qq-text/70 uppercase">
               sys.online
             </span>
           </div>
 
-          <GlassDivider />
+          <span className="w-px h-4 bg-qq-pink/10 shrink-0" aria-hidden="true" />
 
           {/* Social links */}
           <nav className="flex items-center gap-1.5 sm:gap-2" aria-label="Social links">
@@ -98,7 +197,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
               <a
                 key={link.label}
                 href={link.href}
-                className="social-link"
+                className="inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 md:w-[38px] md:h-[38px] rounded-lg sm:rounded-[9px] md:rounded-[10px] bg-qq-pink/8 border border-qq-pink/15 text-qq-text/60 transition-[color,transform,background-color,border-color,box-shadow] duration-200 ease-in-out [@media(hover:hover)]:hover:bg-qq-pink/20 [@media(hover:hover)]:hover:border-qq-pink/40 [@media(hover:hover)]:hover:text-qq-text [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:shadow-[0_0_12px_rgba(253,1,90,0.2)] active:scale-95 focus-visible:outline-2 focus-visible:outline-qq-pink focus-visible:outline-offset-2"
                 aria-label={link.label}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -108,12 +207,12 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
             ))}
           </nav>
 
-          <GlassDivider />
+          <span className="w-px h-4 bg-qq-pink/10 shrink-0" aria-hidden="true" />
 
           {/* Interaction hint */}
-          <div className="flex items-center gap-1.5 hint-text">
+          <div className="flex items-center gap-1.5 [animation:hint-pulse_3s_ease-in-out_infinite]">
             <svg
-              className="orbit-icon w-[10px] h-[10px] sm:w-[11px] sm:h-[11px]"
+              className="inline-block w-[10px] h-[10px] sm:w-[11px] sm:h-[11px] [animation:orbit-spin_6s_linear_infinite]"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -130,7 +229,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
           </div>
 
           {/* Version (tablet+) */}
-          <GlassDivider className="hidden sm:block" />
+          <span className="hidden sm:block w-px h-4 bg-qq-pink/10 shrink-0" aria-hidden="true" />
           <span
             className="hidden sm:block text-[10px] tracking-[2px] text-qq-text/60 whitespace-nowrap"
             aria-hidden="true"
