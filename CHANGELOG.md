@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - CSS now contains only what Tailwind cannot express: pseudo-elements (`::before`/`::after`), `env(safe-area-inset-bottom)`, complex multi-layer backgrounds, `@keyframes`, and dynamically composed class names (`.animate-in`, `.delay-*`)
 - `hud-overlay.tsx`: replaced `GlassDivider` component and all CSS-class-based elements with Tailwind utility classes; `[@media(hover:hover)]:hover:` variant used for pointer-device-only hover on social links
 - `HomePage.tsx`: `LoadingScreen` loader markup converted to Tailwind; `loader-bar-fill` animation referenced via `[animation:loader-slide_...]` arbitrary value
+- Adopted `cn()` utility across all components for Tailwind class readability
+  - `hud-overlay.tsx`, `home-page.tsx`, `coin-viewer.tsx`, `404.astro`: long `className` strings split into semantic groups (layout, size, shape, typography, surface, hover, focus)
 
 ## [0.1.0] - 2026-03-09 (QQAlpha)
 

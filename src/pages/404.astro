@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import { cn } from '../lib/utils'
 ---
 
 <Layout title="404 - Page Not Found | QQ Omega Labs">
@@ -15,7 +16,14 @@ import Layout from '../layouts/Layout.astro'
       </p>
       <a
         href="/"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-qq-pink/10 hover:bg-qq-pink/20 border border-qq-pink/30 rounded-lg text-qq-text transition-all hover:scale-105"
+        class={cn(
+          'inline-flex items-center gap-2',
+          'px-6 py-3',
+          'bg-qq-pink/10 border border-qq-pink/30 rounded-lg',
+          'text-qq-text',
+          'transition-all',
+          'hover:bg-qq-pink/20 hover:scale-105',
+        )}
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path

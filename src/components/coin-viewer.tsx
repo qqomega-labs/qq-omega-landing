@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react'
 import { createCoinScene } from '../lib/coin-scene'
 import type { ICoinScene } from '../lib/coin-scene'
+import { cn } from '../lib/utils'
 
 /**
  * @dev Internal state for pointer drag interactions.
@@ -120,7 +121,7 @@ export default function CoinViewer({ onReady }: ICoinViewerProps) {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 z-[3] cursor-grab active:cursor-grabbing"
+      className={cn('absolute inset-0 z-[3]', 'cursor-grab active:cursor-grabbing')}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
