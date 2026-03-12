@@ -2,6 +2,8 @@
  * @dev HUD-style overlay with header, corner brackets, glass info panel, and hero CTA.
  * Pure presentational component, animation driven by `mounted` prop.
  */
+
+import { version } from 'package.json'
 import { cn } from '../lib/utils'
 
 // PRIVATE - Data
@@ -9,7 +11,7 @@ import { cn } from '../lib/utils'
 const CORNERS = ['tl', 'tr', 'bl', 'br'] as const
 
 /**
- * @dev Extensible buy action registry. Add Base, ETH, or other chains here.
+ * @dev Extensible buy action registry.
  */
 const BUY_ACTIONS = [
   {
@@ -24,6 +26,11 @@ const BUY_ACTIONS = [
 
 const SOCIAL_LINKS = [
   {
+    label: 'Read the documentation',
+    href: 'https://docs.qqomega.xyz/docs/about/why',
+    icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2 5 5h-5V4zM6 20V4h5v7h7v9H6zm2-7h8v2H8v-2zm0 4h5v2H8v-2z',
+  },
+  {
     label: 'Follow us on X',
     href: 'https://x.com/QQomega_labs',
     icon: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
@@ -32,11 +39,6 @@ const SOCIAL_LINKS = [
     label: 'View source on GitHub',
     href: 'https://github.com/qqomega-labs',
     icon: 'M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z',
-  },
-  {
-    label: 'Read the documentation',
-    href: 'https://docs.qqomega.xyz/docs/about/why',
-    icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2 5 5h-5V4zM6 20V4h5v7h7v9H6zm2-7h8v2H8v-2zm0 4h5v2H8v-2z',
   },
 ] as const
 
@@ -59,10 +61,10 @@ function LiveBadge({ label }: { label: string }) {
     <div
       className={cn(
         'inline-flex items-center gap-1.5',
-        'px-2.5 py-1 sm:px-3 sm:py-1.5',
+        'px-3 py-1.5 sm:px-3.5 sm:py-2',
         'rounded-full',
         'bg-[rgba(0,220,120,0.06)] border border-[rgba(0,220,120,0.2)]',
-        'text-[8px] sm:text-[9px] tracking-[1.5px] uppercase text-[rgba(0,220,120,0.7)]',
+        'text-[8px] sm:text-[9px] tracking-[1.5px] uppercase text-[rgba(0,220,120,0.7)]'
       )}
       data-status="launchpad-live"
     >
@@ -71,7 +73,7 @@ function LiveBadge({ label }: { label: string }) {
         className={cn(
           'inline-block w-[5px] h-[5px] rounded-full',
           'bg-[#00dc78] shrink-0',
-          '[animation:live-pulse_2.4s_ease-in-out_infinite]',
+          '[animation:live-pulse_2.4s_ease-in-out_infinite]'
         )}
         aria-hidden="true"
       />
@@ -136,17 +138,18 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
       </div>
 
       {/* Header */}
-      <div className={cn(
-        'absolute inset-x-0 top-0 z-[5] pointer-events-none',
-        'p-10 sm:p-14 md:p-20',
-      )}>
-        <div className="flex items-start justify-center mt-4 sm:mt-6 md:mt-8">
+      <div
+        className={cn('absolute inset-x-0 top-0 z-[5] pointer-events-none', 'p-10 sm:p-14 md:p-20')}
+      >
+        <div className="flex items-start justify-center mt-1 sm:mt-2 md:mt-3">
           <header className={cn('text-center', anim(2))}>
             <div className="flex items-center justify-center">
-              <span className={cn(
-                'text-[28px] sm:text-[32px] md:text-[36px]',
-                'font-bold tracking-[2px] text-qq-text',
-              )}>
+              <span
+                className={cn(
+                  'text-[28px] sm:text-[32px] md:text-[36px]',
+                  'font-bold tracking-[2px] text-qq-text'
+                )}
+              >
                 QQ
               </span>
               {/* blink-cursor: step-end timing + 1em height tied to parent font-size */}
@@ -154,16 +157,18 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
                 className={cn(
                   'inline-block w-[2px] h-[1em]',
                   'bg-qq-pink ml-1 align-middle',
-                  '[animation:blink-cursor_1s_step-end_infinite]',
+                  '[animation:blink-cursor_1s_step-end_infinite]'
                 )}
                 aria-hidden="true"
               />
             </div>
-            <span className={cn(
-              'block mt-1',
-              'text-[10px] sm:text-[11px] md:text-[12px]',
-              'font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/80',
-            )}>
+            <span
+              className={cn(
+                'block mt-1',
+                'text-[10px] sm:text-[11px] md:text-[12px]',
+                'font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/80'
+              )}
+            >
               OMEGA LABS
             </span>
           </header>
@@ -174,9 +179,9 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
       <div
         className={cn(
           'absolute inset-x-0 z-[5]',
-          'bottom-[6rem] sm:bottom-[8rem] md:bottom-[9.5rem]',
+          'bottom-[4rem] sm:bottom-[5rem] md:bottom-[6rem]',
           'flex justify-center items-center px-4 pointer-events-none',
-          anim(3),
+          anim(3)
         )}
       >
         {BUY_ACTIONS.map(action => (
@@ -213,7 +218,7 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
                 '[@media(hover:hover)]:hover:-translate-y-px',
                 // Active / Focus
                 'active:scale-[0.97] active:translate-y-0',
-                'focus-visible:outline-2 focus-visible:outline-qq-pink focus-visible:outline-offset-2',
+                'focus-visible:outline-2 focus-visible:outline-qq-pink focus-visible:outline-offset-2'
               )}
               data-cta={action.dataCta}
               aria-label={action.label}
@@ -225,109 +230,94 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
                 className={cn(
                   'inline-block text-qq-pink/60',
                   'transition-transform duration-200',
-                  '[@media(hover:hover)]:group-hover:translate-x-0.5',
+                  '[@media(hover:hover)]:group-hover:translate-x-0.5'
                 )}
                 aria-hidden="true"
               >
-                &rarr;
+                <span className="text-2xl"> &rarr;</span>
               </span>
             </a>
           </div>
         ))}
       </div>
 
-      {/* Glass panel */}
-      <div className={cn('glass-panel-container', anim(4))}>
-        <div className="glass-panel pointer-events-auto">
-          {/* Status */}
+      {/* Bottom status bar without container */}
+      <div
+        className={cn(
+          'absolute inset-x-0 bottom-0 z-[5]',
+          'safe-area-bottom',
+          'flex items-end justify-between',
+          'px-3 pb-3 sm:px-5 sm:pb-4 md:px-8 md:pb-5',
+          'pointer-events-none',
+          anim(4)
+        )}
+      >
+        {/* Left: status + social */}
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            {/* status-dot: box-shadow pulse keyframe */}
             <span
               className={cn(
-                'inline-block w-[5px] h-[5px] rounded-full',
+                'inline-block w-[6px] h-[6px] rounded-full',
                 'bg-qq-pink',
-                '[animation:status-pulse_2s_ease-in-out_infinite]',
+                '[animation:status-pulse_2s_ease-in-out_infinite]'
               )}
               aria-hidden="true"
             />
-            <span className="text-[9px] sm:text-[10px] tracking-[1.5px] text-qq-text/70 uppercase">
+            <span className="text-[8px] sm:text-[10px] md:text-[11px] tracking-[1.5px] text-qq-text/45 uppercase">
               sys.online
             </span>
           </div>
 
-          <span className="w-px h-4 bg-qq-pink/10 shrink-0" aria-hidden="true" />
+          <span
+            className="text-[8px] sm:text-[10px] md:text-[11px] tracking-[2px] text-qq-text/45"
+            aria-hidden="true"
+          >
+            |
+          </span>
 
-          {/* Social links */}
-          <nav className="flex items-center gap-1.5 sm:gap-2" aria-label="Social links">
-            {SOCIAL_LINKS.map(link => (
+          {/* version */}
+          <span
+            className="text-[8px] sm:text-[10px] md:text-[11px] tracking-[2px] text-qq-text/45"
+            aria-hidden="true"
+          >
+            {'v' + version}
+          </span>
+        </div>
+
+        {/* Right: social links */}
+        <nav
+          className="flex items-center gap-3 sm:gap-4 pointer-events-auto"
+          aria-label="Social links"
+        >
+          {SOCIAL_LINKS.map(link => {
+            const isDocsLink = link.label === 'Read the documentation'
+            return (
               <a
                 key={link.label}
                 href={link.href}
                 className={cn(
-                  // Layout
                   'inline-flex items-center justify-center',
-                  // Size
-                  'w-8 h-8 sm:w-9 sm:h-9 md:w-[38px] md:h-[38px]',
-                  // Shape
-                  'rounded-lg sm:rounded-[9px] md:rounded-[10px]',
-                  // Surface
-                  'bg-qq-pink/8 border border-qq-pink/15',
-                  'text-qq-text/60',
-                  // Transitions
-                  'transition-[color,transform,background-color,border-color,box-shadow]',
-                  'duration-200 ease-in-out',
-                  // Hover (pointer devices only)
-                  '[@media(hover:hover)]:hover:bg-qq-pink/20',
-                  '[@media(hover:hover)]:hover:border-qq-pink/40',
-                  '[@media(hover:hover)]:hover:text-qq-text',
-                  '[@media(hover:hover)]:hover:scale-110',
-                  '[@media(hover:hover)]:hover:shadow-[0_0_12px_rgba(253,1,90,0.2)]',
-                  // Active / Focus
+                  'text-qq-text/55',
+                  'transition-[color,transform] duration-200',
+                  '[@media(hover:hover)]:hover:text-qq-pink',
+                  !isDocsLink && '[@media(hover:hover)]:hover:scale-110',
                   'active:scale-95',
-                  'focus-visible:outline-2 focus-visible:outline-qq-pink focus-visible:outline-offset-2',
+                  'focus-visible:outline-2 focus-visible:outline-qq-pink focus-visible:outline-offset-2'
                 )}
                 aria-label={link.label}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <SocialIcon d={link.icon} />
+                {isDocsLink && (
+                  <span className="hidden sm:inline text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.5px] ml-1.5">
+                    documentation
+                  </span>
+                )}
               </a>
-            ))}
-          </nav>
-
-          <span className="w-px h-4 bg-qq-pink/10 shrink-0" aria-hidden="true" />
-
-          {/* Interaction hint */}
-          <div className="flex items-center gap-1.5 [animation:hint-pulse_3s_ease-in-out_infinite]">
-            <svg
-              className={cn(
-                'inline-block w-[10px] h-[10px] sm:w-[11px] sm:h-[11px]',
-                '[animation:orbit-spin_6s_linear_infinite]',
-              )}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="3" />
-              <ellipse cx="12" cy="12" rx="10" ry="4" />
-            </svg>
-            <span className="text-[9px] sm:text-[10px] text-qq-text/75 tracking-[0.5px] whitespace-nowrap">
-              <span className="hidden sm:inline">drag to rotate</span>
-              <span className="inline sm:hidden">tap &amp; drag</span>
-            </span>
-          </div>
-
-          {/* Version (tablet+) */}
-          <span className="hidden sm:block w-px h-4 bg-qq-pink/10 shrink-0" aria-hidden="true" />
-          <span
-            className="hidden sm:block text-[10px] tracking-[2px] text-qq-text/60 whitespace-nowrap"
-            aria-hidden="true"
-          >
-            v0.1.0
-          </span>
-        </div>
+            )
+          })}
+        </nav>
       </div>
     </>
   )

@@ -34,6 +34,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `HomePage.tsx`: `LoadingScreen` loader markup converted to Tailwind; `loader-bar-fill` animation referenced via `[animation:loader-slide_...]` arbitrary value
 - Adopted `cn()` utility across all components for Tailwind class readability
   - `hud-overlay.tsx`, `home-page.tsx`, `coin-viewer.tsx`, `404.astro`: long `className` strings split into semantic groups (layout, size, shape, typography, surface, hover, focus)
+- Read package version from `package.json` in `HudOverlay.ts` component
+- Replaced glass panel bottom bar with raw footer: no container, no blur, no rounded corners
+  - Elements spread edge-to-edge: `sys.online` + version left, social links right
+  - Removed "drag to rotate" interaction hint
+  - Docs social link shows "documentation" label on tablet/desktop (`hidden sm:inline`), icon-only on mobile
+  - Footer text scaled up to `md:text-[11px]` on desktop for legibility
+- Raised title header closer to top edge (`mt-1/2/3`)
+- Fixed footer social links not clickable: added `pointer-events-auto` to `nav`
 
 ## [0.1.0] - 2026-03-09 (QQAlpha)
 
