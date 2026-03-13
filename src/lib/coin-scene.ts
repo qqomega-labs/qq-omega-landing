@@ -327,6 +327,7 @@ export function createCoinScene(container: HTMLElement): ICoinScene {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxDpr))
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = 1.3
+  renderer.domElement.style.touchAction = 'none'
   container.appendChild(renderer.domElement)
 
   // Scene + env

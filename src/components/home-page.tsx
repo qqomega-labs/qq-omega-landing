@@ -16,28 +16,36 @@ function LoadingScreen() {
     <div className="absolute inset-0 z-10 flex items-center justify-center bg-qq-bg">
       <div className="flex flex-col items-center gap-4">
         <div className="text-center">
-          <span className={cn(
-            'text-[28px] sm:text-[32px] md:text-[36px]',
-            'font-bold tracking-[2px] text-qq-text',
-          )}>
+          <span
+            className={cn(
+              'text-[28px] sm:text-[32px] md:text-[36px]',
+              'font-bold tracking-[2px] text-qq-text'
+            )}
+          >
             QQ
           </span>
-          <span className={cn(
-            'block mt-1',
-            'text-[10px] sm:text-[11px] md:text-[12px]',
-            'font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/80',
-          )}>
+          <span
+            className={cn(
+              'block mt-1',
+              'text-[10px] sm:text-[11px] md:text-[12px]',
+              'font-light tracking-[4px] sm:tracking-[5px] text-qq-pink/80'
+            )}
+          >
             OMEGA LABS
           </span>
         </div>
-        <div className={cn(
-          'w-[100px] md:w-[120px] h-[2px]',
-          'bg-qq-pink/6 rounded-[1px] overflow-hidden',
-        )}>
-          <div className={cn(
-            'w-2/5 h-full bg-qq-pink rounded-[1px]',
-            '[animation:loader-slide_3s_ease-in-out_infinite]',
-          )} />
+        <div
+          className={cn(
+            'w-[100px] md:w-[120px] h-[2px]',
+            'bg-qq-pink/6 rounded-[1px] overflow-hidden'
+          )}
+        >
+          <div
+            className={cn(
+              'w-2/5 h-full bg-qq-pink rounded-[1px]',
+              '[animation:loader-slide_3s_ease-in-out_infinite]'
+            )}
+          />
         </div>
       </div>
     </div>

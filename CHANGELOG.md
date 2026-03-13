@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Drag-to-rotate broken on mobile: added `touch-none` (`touch-action: none`) to `coin-viewer` container div so the browser stops intercepting single-finger pan gestures before pointer events fire
+- Drag-to-rotate (coin spin) broken on mobile (Safari and Chrome)
+  - Root cause: React synthetic event delegation does not reliably dispatch events that originate from non-React DOM children (the Three.js canvas appended via `appendChild`)
+  - Replaced React `onPointer*` props on the container div with native `addEventListener` calls attached directly to `renderer.domElement` inside `useEffect`
+  - Added `canvas.setPointerCapture(e.pointerId)` in `pointerdown` handler so `pointermove`/`pointerup` keep firing even when a fast swipe exits canvas bounds
+  - Set `renderer.domElement.style.touchAction = 'none'` in `coin-scene.ts` to prevent the browser from intercepting single-finger pan gestures before pointer events fire
+  - Added `pointercancel` listener aliased to the end-drag handler for clean state reset on browser-initiated cancellation
 
 ## [Unreleased] - 2026-03-12 (QQAlpha)
 
