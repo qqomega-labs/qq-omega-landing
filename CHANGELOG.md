@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 2026-03-12 (QQAlpha)
+
+### Added
+
+- Hero CTA `Buy $QQ on Solana` in the HUD overlay, positioned above the glass panel
+  - Opens the Jupiter launchpad in a new tab (`rel="noopener noreferrer"`)
+  - `Launchpad Live` status badge with green pulsing live indicator (`live-pulse` keyframe)
+  - Analytics hook firing `buy_qq_solana_click` event to `gtag`/`plausible` if present
+  - `data-cta="buy-qq-solana"` and `data-status="launchpad-live"` tracking attributes
+  - Extensible `BUY_ACTIONS` registry for future multi-chain buy buttons (Base, ETH, etc.)
+  - Installed `tailwind-merge` and `clsx` packages and created `cn` utility function.
+- Solana logo icon (`SolanaIcon`) inside CTA button for brand recognition
+
+### Changed
+
+- Improved Hero CTA button UX
+  - Replaced transparent gradient background with solid opaque surface (`rgba(10,3,18,0.75)`) for better readability
+  - Increased spacing between CTA and glass panel (`bottom-[6rem]`/`[8rem]`/`[9.5rem]`)
+  - Refined `LiveBadge`: smaller pill shape (`rounded-full`), tighter sizing
+  - Arrow indicator styled with `text-qq-pink/60` for visual hierarchy
+- Wrapped CSS reset (`*`, `html`, `body`, `::selection`) in `@layer base` to fix Tailwind v4 cascade issue where unlayered reset overrode utility classes (padding, margin)
+- Refactored `src/styles/app.css`: removed all custom classes expressible as Tailwind utilities
+  - Deleted dead code: `.safe-area-bottom/sm/md`, `.bg-grid-pink`, `.loader-content`, `.loader-text`, `.loader-subtitle`, `.animate-loading-pulse`, `@keyframes loading-pulse`
+  - Converted to Tailwind in JSX: `.glass-divider`, `.social-link`, `.status-dot`, `.blink-cursor`, `.orbit-icon`, `.hint-text`, `.loader`, `.loader-bar`, `.loader-bar-fill`
+  - CSS now contains only what Tailwind cannot express: pseudo-elements (`::before`/`::after`), `env(safe-area-inset-bottom)`, complex multi-layer backgrounds, `@keyframes`, and dynamically composed class names (`.animate-in`, `.delay-*`)
+- `hud-overlay.tsx`: replaced `GlassDivider` component and all CSS-class-based elements with Tailwind utility classes; `[@media(hover:hover)]:hover:` variant used for pointer-device-only hover on social links
+- `HomePage.tsx`: `LoadingScreen` loader markup converted to Tailwind; `loader-bar-fill` animation referenced via `[animation:loader-slide_...]` arbitrary value
+- Adopted `cn()` utility across all components for Tailwind class readability
+  - `hud-overlay.tsx`, `home-page.tsx`, `coin-viewer.tsx`, `404.astro`: long `className` strings split into semantic groups (layout, size, shape, typography, surface, hover, focus)
+- Read package version from `package.json` in `HudOverlay.ts` component
+- Replaced glass panel bottom bar with raw footer: no container, no blur, no rounded corners
+  - Elements spread edge-to-edge: `sys.online` + version left, social links right
+  - Removed "drag to rotate" interaction hint
+  - Docs social link shows "documentation" label on tablet/desktop (`hidden sm:inline`), icon-only on mobile
+  - Footer text scaled up to `md:text-[11px]` on desktop for legibility
+- Raised title header closer to top edge (`mt-1/2/3`)
+- Fixed footer social links not clickable: added `pointer-events-auto` to `nav`
+
 ## [0.1.0] - 2026-03-09 (QQAlpha)
 
 ### Added
