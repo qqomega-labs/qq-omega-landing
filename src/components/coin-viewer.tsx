@@ -121,7 +121,7 @@ export default function CoinViewer({ onReady }: ICoinViewerProps) {
   return (
     <div
       ref={containerRef}
-      className={cn('absolute inset-0 z-[3]', 'cursor-grab active:cursor-grabbing')}
+      className={cn('absolute inset-0 z-[3]', 'cursor-grab active:cursor-grabbing', 'touch-none')}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
