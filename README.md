@@ -28,11 +28,12 @@ qq-omega-landing/
 │   ├── layouts/
 │   │   └── Layout.astro      # Base HTML layout with SEO
 │   ├── components/
-│   │   ├── HomePage.tsx      # React island orchestrating 3D + HUD
+│   │   ├── home-page.tsx     # React island orchestrating 3D + HUD
 │   │   ├── coin-viewer.tsx   # 3D viewer with drag interaction
-│   │   └── hud-overlay.tsx   # Glass HUD with social links
+│   │   └── hud-overlay.tsx   # HUD overlay with header, CTA, and footer bar
 │   ├── lib/
 │   │   ├── coin-scene.ts     # Three.js scene factory and physics
+│   │   ├── utils.ts          # `cn()` class name utility (clsx + tailwind-merge)
 │   │   └── paths.ts          # SVG path data for QQ logo
 │   └── styles/
 │       └── app.css           # Global styles, custom utilities, animations
@@ -71,6 +72,12 @@ pnpm run dev
 ```
 
 Default URL: `http://localhost:4321`
+
+To test on a mobile device (same Wi-Fi network required):
+
+```bash
+pnpm run dev --host
+```
 
 The site uses Astro islands architecture: static HTML with React islands for interactive components (3D viewer, HUD).
 
@@ -183,7 +190,7 @@ The site includes a custom loading screen that displays while the Three.js scene
 - QQ logo with animated progress bar
 - CSS-only animations (no JavaScript)
 - Automatically hidden when scene is ready
-- Defined in `src/styles/app.css` (`.loader` classes)
+- Markup lives in `src/components/home-page.tsx` (`LoadingScreen` component); keyframes defined in `app.css`
 
 ### Client-Side Hydration
 
@@ -191,7 +198,6 @@ Three.js requires browser APIs (WebGL, DOM). React islands with `client:only="re
 
 - Skip server-side rendering entirely
 - Hydrate only in browser
-- Lazy load components with React.lazy()
 
 All SEO assets are located in `public/` and automatically served by Astro during build.
 
