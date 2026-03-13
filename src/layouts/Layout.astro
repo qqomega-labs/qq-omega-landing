@@ -4,9 +4,21 @@ import '../styles/app.css'
 
 interface Props {
   title: string
+  description?: string
+  ogTitle?: string
+  ogDescription?: string
 }
 
-const { title } = Astro.props
+const {
+  title,
+  description = 'QQ Omega combines AI-powered agents to score and rank cryptocurrency projects across fundamentals, tokenomics, on-chain metrics, technicals, and macro trends. Get clear, actionable scores for smarter crypto investments.',
+  ogTitle = 'QQ Omega Labs - AI-Powered Crypto Scoring Platform',
+  ogDescription = 'QQ Omega combines AI-powered agents to score and rank cryptocurrency projects. Get clear, actionable scores for smarter crypto investments.',
+} = Astro.props
+
+// Canonical URL resolved dynamically per page — avoids og:url pointing to the
+// homepage on every route, which causes Google to treat all pages as duplicates.
+const canonicalUrl = Astro.url.href
 ---
 
 <!doctype html>
@@ -29,38 +41,28 @@ const { title } = Astro.props
       name="keywords"
       content="QQ Omega, crypto scoring, AI agents, cryptocurrency analysis, quantitative analysis, qualitative analysis, crypto trading, blockchain analytics, DeFi, tokenomics, on-chain analysis, crypto fundamentals"
     />
-    <meta
-      name="description"
-      content="QQ Omega combines AI-powered agents to score and rank cryptocurrency projects across fundamentals, tokenomics, on-chain metrics, technicals, and macro trends. Get clear, actionable scores for smarter crypto investments."
-    />
+    <meta name="description" content={description} />
     <meta name="author" content="QQ Omega Labs" />
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@qqomega" />
     <meta name="twitter:creator" content="@qqomega" />
-    <meta name="twitter:title" content="QQ Omega Labs - AI-Powered Crypto Scoring Platform" />
-    <meta
-      name="twitter:description"
-      content="Combining quantitative and qualitative data to evaluate every aspect of crypto assets with specialized AI agents."
-    />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content="https://qqomega.xyz/img/qq-og-image.png" />
 
     <!-- Open Graph Tags -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="QQ Omega Labs - AI-Powered Crypto Scoring Platform" />
-    <meta
-      property="og:description"
-      content="QQ Omega combines AI-powered agents to score and rank cryptocurrency projects. Get clear, actionable scores for smarter crypto investments."
-    />
-    <meta property="og:url" content="https://qqomega.xyz" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content="https://qqomega.xyz/img/qq-og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="QQ Omega Labs" />
     <meta property="og:site_name" content="QQ Omega Labs" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="zh_CN" />
 
     <title>{title}</title>
   </head>

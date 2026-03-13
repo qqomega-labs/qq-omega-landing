@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://qqomega.xyz/sitemap.xml
+Sitemap: https://qqomega.xyz/sitemap-index.xml
 
 # Disallow build artifacts and development files
 Disallow: /dist/

@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **SEO: sitemap never generated** (`astro.config.mjs`, `public/robots.txt`)
+  - `robots.txt` referenced `https://qqomega.xyz/sitemap.xml` but no sitemap was ever produced - `@astrojs/sitemap` was not installed or configured
+  - Added `@astrojs/sitemap` integration and `site: 'https://qqomega.xyz'` to `astro.config.mjs`
+  - Astro generates a sitemap index at `sitemap-index.xml`; updated `robots.txt` to reference the correct filename
+- **SEO: static `og:url` on every page** (`src/layouts/Layout.astro`)
+  - `og:url` was hardcoded to `https://qqomega.xyz`, causing Google to treat every page as a duplicate of the homepage
+  - Replaced with `Astro.url.href` for accurate per-page canonical URL
+- **SEO: per-page meta tags not overridable** (`src/layouts/Layout.astro`)
+  - `description`, `og:title`, `og:description`, `twitter:title`, `twitter:description` were static strings with no way to override per page
+  - Exposed as optional props on `Layout` with sensible defaults - callers can now pass custom values per route
+- **SEO: spurious `og:locale:alternate` for `zh_CN`** (`src/layouts/Layout.astro`)
+  - This site has no Chinese locale; the alternate tag was misleading and has been removed
 - Drag-to-rotate (coin spin) broken on mobile (Safari and Chrome)
   - Root cause: React synthetic event delegation does not reliably dispatch events that originate from non-React DOM children (the Three.js canvas appended via `appendChild`)
   - Replaced React `onPointer*` props on the container div with native `addEventListener` calls attached directly to `renderer.domElement` inside `useEffect`
