@@ -134,7 +134,7 @@ function LiveBadge({ label }: { label: string }) {
 function HeroCta({ anim }: { mounted: boolean; anim: (d: number) => string }) {
   const navRef = useRef<HTMLElement>(null)
   const [indicator, setIndicator] = useState<{ left: number; width: number } | null>(null)
-  const [activeIndex, setActiveIndex] = useState(1) // because of docs postion 1
+  const [activeIndex, setActiveIndex] = useState(0)
 
   // Measure a segment element and update the sliding indicator position
   const updateIndicator = useCallback((el: HTMLElement) => {
@@ -176,7 +176,7 @@ function HeroCta({ anim }: { mounted: boolean; anim: (d: number) => string }) {
       className={cn(
         'absolute inset-x-0 z-[5]',
         'bottom-[4rem] sm:bottom-[5rem] md:bottom-[6rem]',
-          'landscape:bottom-[2.5rem] landscape:sm:bottom-[3rem]',
+        'landscape:bottom-[2.5rem] landscape:sm:bottom-[3rem]',
         'flex justify-center items-center px-4 pointer-events-none',
         anim(3)
       )}
@@ -216,7 +216,9 @@ function HeroCta({ anim }: { mounted: boolean; anim: (d: number) => string }) {
           {CTA_SEGMENTS.map((segment, i) => (
             <a
               key={segment.id}
-              ref={el => { segmentRefs.current[i] = el }}
+              ref={el => {
+                segmentRefs.current[i] = el
+              }}
               href={segment.href}
               target="_blank"
               rel="noopener noreferrer"
