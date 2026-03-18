@@ -1,6 +1,6 @@
 {
   "name": "qq-omega-landing",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "type": "module",
   "author": "QQ Omega Labs",
@@ -23,6 +23,7 @@
     "@astrojs/sitemap": "^3.7.1",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.577.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwind-merge": "^3.5.0",

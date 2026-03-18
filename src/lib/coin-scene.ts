@@ -278,10 +278,7 @@ function createEnvMap(): THREE.CanvasTexture {
 /*  PRIVATE - Responsive camera helpers                               */
 /* ------------------------------------------------------------------ */
 
-// Desktop baseline values - coin slightly smaller (camera further)
-const BASE_FOV = 32
-const BASE_CAM_Y = 2.8
-const BASE_CAM_Z = 6.5 // Was 5.8, now further for smaller coin
+const BASE_CAM_Y = 2.0
 
 /**
  * @dev Computes camera Z offset and FOV for the given viewport.
@@ -291,20 +288,25 @@ const BASE_CAM_Z = 6.5 // Was 5.8, now further for smaller coin
 function getResponsiveCameraParams(w: number, h: number): { fov: number; y: number; z: number } {
   const aspect = w / h
 
+  // Landscape on small screens (phone rotated): very short viewport
+  if (aspect > 1.3 && h < 500) {
+    return { fov: 38, y: 1.8, z: 7.5 }
+  }
+
   if (aspect < 0.6) {
-    // Very narrow portrait (e.g. 375x812 iPhone)
-    return { fov: 44, y: BASE_CAM_Y, z: 9.8 } // Was 8.8
+    // Very narrow portrait (e.g. 375x667 iPhone SE, 393x852 iPhone Pro)
+    return { fov: 46, y: BASE_CAM_Y, z: 11.0 }
   }
   if (aspect < 0.85) {
     // Standard portrait phone
-    return { fov: 40, y: BASE_CAM_Y, z: 9.0 } // Was 8.0
+    return { fov: 42, y: BASE_CAM_Y, z: 10.0 }
   }
   if (aspect < 1.1) {
     // Square-ish or tablet portrait
-    return { fov: 36, y: BASE_CAM_Y, z: 7.8 } // Was 7.0
+    return { fov: 40, y: BASE_CAM_Y, z: 9.5 }
   }
   // Landscape / desktop
-  return { fov: BASE_FOV, y: BASE_CAM_Y, z: BASE_CAM_Z }
+  return { fov: 36, y: BASE_CAM_Y, z: 8.2 }
 }
 
 /* ------------------------------------------------------------------ */
