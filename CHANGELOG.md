@@ -5,11 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2026-03-16 (QQAlpha)
+## [v0.1.2] - 2026-03-18 (QQAlpha)
 
 ### Added
 
+- **Segmented CTA toggle switch** replacing single Buy button
+  - Two-segment glassmorphism pill: `Buy $QQ` (Solana) and `Docs` (documentation)
+  - Each segment is a direct `<a>` link with one-tap navigation
+  - Sliding pink accent indicator with `cubic-bezier` animation on hover/tap
+  - Persistent selection state: hovering Buy keeps it selected after pointer leave
+  - `ResizeObserver` recalculates indicator position on viewport resize
+  - `useLayoutEffect` initializes indicator before first paint (no flash)
+  - `onPointerDown` for mobile touch support alongside `onPointerEnter` for desktop
+- Added `lucide-react` dependency for `BookOpen` icon in Docs CTA segment
+- Dedicated icon components: `XIcon`, `GithubIcon` (raw SVG), `SolanaIcon` (unchanged)
+
+### Changed
+
+- **Coin size reduced across all viewports** for better visual balance
+  - Phone portrait narrow: `fov: 46`, `z: 11.0`
+  - Phone portrait standard: `fov: 42`, `z: 10.0`
+  - Tablet portrait: `fov: 40`, `z: 9.5` (was `36`/`7.8`)
+  - Desktop/landscape: `fov: 36`, `z: 8.2` (was `32`/`6.5`)
+- **Coin repositioned upward** (`BASE_CAM_Y: 2.8` to `2.0`) to center the background gradient
+- **Landscape orientation support**
+  - New camera breakpoint for phone landscape (`aspect > 1.3 && h < 500`): `fov: 38`, `y: 1.8`, `z: 7.5`
+  - HUD overlay: reduced header padding, title size, CTA bottom offset, segment heights, and status bar spacing via `landscape:` Tailwind variant
+- Social links refactored from raw SVG path strings in data to dedicated icon components (`XIcon`, `GithubIcon`)
+- Docs link removed from bottom social bar (now in CTA segment)
 - Updated `.gitignore` excluding `.astro` folder.
+
+### Removed
+
+- `SocialIcon` generic component (replaced by dedicated icon components)
+- `BUY_ACTIONS` registry (replaced by `CTA_SEGMENTS`)
 
 ## [v0.1.1] - 2026-03-13 (QQAlpha)
 
