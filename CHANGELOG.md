@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 2026-04-01 (QQAlpha)
+
+### Changed
+
+- **Background aura**: increased radial glow opacity and spread; responsive variants per breakpoint — mobile glow positioned higher (`50% 30%`, opacity `0.22`), tablet (`50% 38%`, opacity `0.24`), desktop (`50% 45%`, opacity `0.26`) with extra top-edge layer; landscape phone override with wider horizontal ellipse (`160% 80%`, opacity `0.18`); base dark gradient lightened from `#120610/#060110` to `#1c0a18/#0a0216/#010008`
+- **Vignette**: opacity reduced from `0.65` (flat) to `0.50` mobile / `0.45` desktop to let the aura breathe
+
 ## [v0.1.2] - 2026-03-18 (QQAlpha)
 
 ### Added
