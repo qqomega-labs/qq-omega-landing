@@ -8,6 +8,7 @@
   --color-qq-surface: #0a0312;
   --color-qq-text: #f0e8f0;
   --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
+  --font-sans: 'Outfit', system-ui, sans-serif;
 }
 
 /* Reset — wrapped in @layer base so Tailwind utilities can override */
