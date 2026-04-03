@@ -5,38 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2026-04-03 (QQAlpha)
+## [v0.1.3] - 2026-04-03 (QQAlpha)
 
 ### Added
 
-- **Outfit font**: loaded from Google Fonts (`wght@400;500;600;700`) via preconnect links in
-  `Layout.astro`; `--font-sans` token added to `@theme` in `app.css`
+- **Outfit font**: loaded from Google Fonts (`wght@400;500;600;700`)
+  via preconnect links in `Layout.astro`; `--font-sans` token added
+  to `@theme` in `app.css`
+- **Cloudflare Pages deploy script**: `pnpm deploy` runs
+  `astro check && astro build && wrangler pages deploy dist`
+- **`wrangler` dev dependency**: added for CLI deployment support
 
 ### Changed
 
 - **CTA "Buy $QQ" replaced with "$QQ Launchpad"**: links to
   `launchpad.qqomega.xyz` instead of Jupiter (`jup.ag`); Solana icon
   replaced with pulsing green live indicator
-- **Corner brackets visibility**: opacity increased from `0.12` to `0.3`
-- **Corner bracket positions**: unified to `20px` inset on all screen sizes
-- **Footer repositioned inside bracket frame**: consistent `bottom-2` +
-  `px-9` across all breakpoints; mobile `safe-area-bottom` fallback
+- **Corner brackets visibility**: opacity increased from `0.12` to
+  `0.3`
+- **Corner bracket positions**: unified to `20px` inset on all screen
+  sizes
+- **Footer repositioned inside bracket frame**: consistent `bottom-2`
+  + `px-9` across all breakpoints; mobile `safe-area-bottom` fallback
   increased to `1.25rem`
-- **404 page typography**: content wrapper now uses `font-sans` (`Outfit`) instead of inheriting
-  the site-wide `JetBrains Mono` body font, aligning visually with the launchpad subdomain 404
-  page
-- **Background aura**: increased radial glow opacity and spread; responsive variants per breakpoint
+- **404 page typography**: content wrapper now uses `font-sans`
+  (`Outfit`) instead of inheriting the site-wide `JetBrains Mono`
+  body font, aligning visually with the launchpad subdomain 404 page
+- **Background aura**: increased radial glow opacity and spread;
+  responsive variants per breakpoint
   - Mobile glow positioned higher (`50% 30%`, opacity `0.22`)
   - Tablet (`50% 38%`, opacity `0.24`)
   - Desktop (`50% 45%`, opacity `0.26`) with extra top-edge layer
-  - Landscape phone override with wider horizontal ellipse (`160% 80%`, opacity `0.18`)
-  - Base dark gradient lightened from `#120610/#060110` to `#1c0a18/#0a0216/#010008`
-- **Vignette**: opacity reduced from `0.65` (flat) to `0.50` mobile / `0.45` desktop to let the
-  aura breathe
+  - Landscape phone override with wider horizontal ellipse
+    (`160% 80%`, opacity `0.18`)
+  - Base dark gradient lightened from `#120610/#060110` to
+    `#1c0a18/#0a0216/#010008`
+- **Vignette**: opacity reduced from `0.65` (flat) to `0.50` mobile /
+  `0.45` desktop to let the aura breathe
 
 ### Removed
 
-- **`LiveBadge` chip**: redundant after green live dot moved into the CTA button
+- **`LiveBadge` chip**: redundant after green live dot moved into the
+  CTA button
 
 ## [v0.1.2] - 2026-03-18 (QQAlpha)
 
