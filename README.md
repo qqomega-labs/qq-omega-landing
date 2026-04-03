@@ -12,7 +12,6 @@ Features a real-time 3D coin renderer built with Three.js and Astro islands arch
 | 3D        | Three.js 0.183                                   |
 | Language  | TypeScript 5.9                                   |
 | Fonts     | JetBrains Mono (variable), Outfit (Google Fonts) |
-| Deploy    | Cloudflare Pages + Wrangler                      |
 
 ## Getting Started
 

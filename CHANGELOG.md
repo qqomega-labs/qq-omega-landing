@@ -17,6 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`contributors` field** in `package.json`: `qqalpha` and `qqsigma`
 - **Browser support section** in `README.md`
 
+### Fixed
+
+- **CSP blocking page load**: `font-src` now allows `data:` for
+  `@fontsource` base64-inlined woff2; `script-src` allows `'unsafe-inline'`
+  for Astro inline scripts and `https://static.cloudflareinsights.com` for
+  CF analytics; `connect-src` allows `https://cloudflareinsights.com`
+
 ### Changed
 
 - **`README.md` rewritten**: kept only essential info for a public repo
