@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.4] - 2026-04-03 (QQAlpha)
+
+### Added
+
+- **`Content-Security-Policy` header**: restrictive CSP in `public/_headers`
+  covering `self`, Google Fonts, inline styles, data URIs; blocks `object`,
+  `base`, and `form-action`
+- **`gitleaks` config**: `.gitleaks.toml` with allowlist for `node_modules`,
+  `dist`, `pnpm-lock.yaml`, `.wrangler`
+- **`contributors` field** in `package.json`: `qqalpha` and `qqsigma`
+- **Browser support section** in `README.md`
+
+### Changed
+
+- **`README.md` rewritten**: kept only essential info for a public repo
+
 ## [v0.1.3] - 2026-04-03 (QQAlpha)
 
 ### Added
@@ -26,8 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Corner bracket positions**: unified to `20px` inset on all screen
   sizes
 - **Footer repositioned inside bracket frame**: consistent `bottom-2`
-  + `px-9` across all breakpoints; mobile `safe-area-bottom` fallback
-  increased to `1.25rem`
+  - `px-9` across all breakpoints; mobile `safe-area-bottom` fallback
+    increased to `1.25rem`
 - **404 page typography**: content wrapper now uses `font-sans`
   (`Outfit`) instead of inheriting the site-wide `JetBrains Mono`
   body font, aligning visually with the launchpad subdomain 404 page

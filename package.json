@@ -1,9 +1,19 @@
 {
   "name": "qq-omega-landing",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "license": "MIT",
   "type": "module",
   "author": "QQ Omega Labs",
+  "contributors": [
+    {
+      "name": "qqalpha",
+      "url": "https://github.com/qqalpha"
+    },
+    {
+      "name": "qqsigma",
+      "url": "https://github.com/qqsigma"
+    }
+  ],
   "homepage": "https://qqomega.xyz",
   "repository": {
     "type": "git",
