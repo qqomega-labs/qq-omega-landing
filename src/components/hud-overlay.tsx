@@ -63,11 +63,11 @@ const ICON_SIZE = 'w-[13px] h-[13px] sm:w-[14px] sm:h-[14px]'
 
 const CTA_SEGMENTS = [
   {
-    id: 'buy' as const,
-    label: 'Buy $QQ',
-    href: 'https://jup.ag/tokens/76vURLKDqAMhiX2wvoedoWRNvwqSjsZ7EtrJKJiKArDN',
-    trackingEvent: 'buy_qq_solana_click',
-    icon: <SolanaIcon />,
+    id: 'launchpad' as const,
+    label: '$QQ Launchpad',
+    href: 'https://launchpad.qqomega.xyz',
+    trackingEvent: 'launchpad_click',
+    icon: <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" aria-label="Live" />,
   },
   {
     id: 'docs' as const,
@@ -104,32 +104,6 @@ function trackClick(event: string) {
 }
 
 // PRIVATE - Subcomponents
-
-function LiveBadge({ label }: { label: string }) {
-  return (
-    <div
-      className={cn(
-        'inline-flex items-center gap-1.5',
-        'px-3 py-1.5 sm:px-3.5 sm:py-2',
-        'rounded-full',
-        'bg-[rgba(0,220,120,0.06)] border border-[rgba(0,220,120,0.2)]',
-        'text-[8px] sm:text-[9px] tracking-[1.5px] uppercase text-[rgba(0,220,120,0.7)]'
-      )}
-      data-status="launchpad-live"
-    >
-      {/* live-dot: Tailwind can't express this box-shadow pulse keyframe */}
-      <span
-        className={cn(
-          'inline-block w-[5px] h-[5px] rounded-full',
-          'bg-[#00dc78] shrink-0',
-          '[animation:live-pulse_2.4s_ease-in-out_infinite]'
-        )}
-        aria-hidden="true"
-      />
-      <span>{label}</span>
-    </div>
-  )
-}
 
 function HeroCta({ anim }: { mounted: boolean; anim: (d: number) => string }) {
   const navRef = useRef<HTMLElement>(null)
@@ -175,15 +149,13 @@ function HeroCta({ anim }: { mounted: boolean; anim: (d: number) => string }) {
     <div
       className={cn(
         'absolute inset-x-0 z-[5]',
-        'bottom-[4rem] sm:bottom-[5rem] md:bottom-[6rem]',
-        'landscape:bottom-[2.5rem] landscape:sm:bottom-[3rem]',
+        'bottom-[6rem] sm:bottom-[7rem] md:bottom-[8rem]',
+        'landscape:bottom-[4rem] landscape:sm:bottom-[5rem]',
         'flex justify-center items-center px-4 pointer-events-none',
         anim(3)
       )}
     >
       <div className="flex flex-col items-center gap-2.5 landscape:gap-1.5 pointer-events-auto">
-        <LiveBadge label="Launchpad Live" />
-
         {/* Segmented CTA: each segment is a direct link */}
         <nav
           ref={navRef}
@@ -246,7 +218,7 @@ function HeroCta({ anim }: { mounted: boolean; anim: (d: number) => string }) {
                 'focus-visible:outline-2 focus-visible:outline-qq-pink focus-visible:outline-offset-2'
               )}
               data-cta={segment.id}
-              aria-label={segment.id === 'buy' ? 'Buy $QQ on Solana' : 'Read the documentation'}
+              aria-label={segment.id === 'launchpad' ? 'Go to $QQ Launchpad' : 'Read the documentation'}
               onClick={() => trackClick(segment.trackingEvent)}
               onPointerEnter={e => handleSelect(e, i)}
               onPointerDown={e => handleSelect(e, i)}
@@ -329,11 +301,11 @@ export default function HudOverlay({ mounted }: IHudOverlayProps) {
       {/* Bottom status bar without container */}
       <div
         className={cn(
-          'absolute inset-x-0 bottom-0 z-[5]',
+          'absolute inset-x-0 bottom-2 z-[5]',
           'safe-area-bottom',
           'flex items-end justify-between',
-          'px-3 pb-3 sm:px-5 sm:pb-4 md:px-8 md:pb-5',
-          'landscape:pb-2 landscape:sm:pb-3',
+          'px-9',
+          'landscape:bottom-3',
           'pointer-events-none',
           anim(4)
         )}
